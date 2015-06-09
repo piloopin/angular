@@ -10,6 +10,7 @@ import {PromisePipeFactory} from './pipes/promise_pipe';
 import {UpperCaseFactory} from './pipes/uppercase_pipe';
 import {LowerCaseFactory} from './pipes/lowercase_pipe';
 import {JsonPipe} from './pipes/json_pipe';
+import {LimitToPipeFactory} from './pipes/limit_to_pipe';
 import {NullPipeFactory} from './pipes/null_pipe';
 import {ChangeDetection, ProtoChangeDetector, ChangeDetectorDefinition} from './interfaces';
 import {Inject, Injectable, OpaqueToken, Optional} from 'angular2/di';
@@ -59,13 +60,21 @@ export var lowercase: List<PipeFactory> = [new LowerCaseFactory(), new NullPipeF
  */
 export var json: List<PipeFactory | Pipe> = [new JsonPipe(), new NullPipeFactory()];
 
+/**
+ * LimitTo text transform.
+ *
+ * @exportedAs angular2/pipes
+ */
+export var limitTo: List<PipeFactory> = [new LimitToPipeFactory(), new NullPipeFactory()];
+
 export var defaultPipes = {
   "iterableDiff": iterableDiff,
   "keyValDiff": keyValDiff,
   "async": async,
   "uppercase": uppercase,
   "lowercase": lowercase,
-  "json": json
+  "json": json,
+  "limitTo": limitTo
 };
 
 /**
