@@ -322,6 +322,15 @@ export function main() {
             val.changeDetector.detectChanges();
             expect(val.dispatcher.loggedValues).toEqual(['bob state:0']);
           });
+
+          it('should support arguments in pipes', () => {
+            var registry = new FakePipeRegistry('pipe', () => new MultiArgPipe());
+            var address = new Address('two');
+            var person = new Person('value', address);
+            var val = _createChangeDetector("name | pipe:'one':address.city", person, registry);
+            val.changeDetector.detectChanges();
+            expect(val.dispatcher.loggedValues).toEqual(['value one two default']);
+          });
         });
 
         it('should notify the dispatcher on all changes done', () => {
@@ -882,6 +891,12 @@ class IdentityPipe extends Pipe {
 
 class WrappedPipe extends Pipe {
   transform(value) { return WrappedValue.wrap(value); }
+}
+
+class MultiArgPipe extends Pipe {
+  transform(value, arg1: string, arg2: string, arg3: string = 'default') {
+    return `${value} ${arg1} ${arg2} ${arg3}`;
+  }
 }
 
 class FakePipeRegistry extends PipeRegistry {

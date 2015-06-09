@@ -1,5 +1,5 @@
 import {isString, StringWrapper} from 'angular2/src/facade/lang';
-import {Pipe} from './pipe';
+import {Pipe, PipeFactory} from './pipe';
 
 /**
  * Implements lowercase transforms to text.
@@ -46,8 +46,8 @@ export class LowerCasePipe extends Pipe {
 /**
  * @exportedAs angular2/pipes
  */
-export class LowerCaseFactory {
+export class LowerCaseFactory implements PipeFactory {
   supports(str): boolean { return isString(str); }
 
-  create(): Pipe { return new LowerCasePipe(); }
+  create(cdRef): Pipe { return new LowerCasePipe(); }
 }

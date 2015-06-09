@@ -26,7 +26,7 @@ import {Pipe, PipeFactory} from './pipe';
  *
  * @exportedAs angular2/pipes
  */
-export class JsonPipe extends Pipe {
+export class JsonPipe extends Pipe implements PipeFactory {
   supports(obj): boolean { return true; }
 
   transform(value): string { return Json.stringify(value); }

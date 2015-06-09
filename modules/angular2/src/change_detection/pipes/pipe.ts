@@ -1,32 +1,5 @@
 import {ABSTRACT, BaseException, CONST} from 'angular2/src/facade/lang';
-
-/**
- * Indicates that the result of a {@link Pipe} transformation has changed even though the reference
- *has not changed.
- *
- * The wrapped value will be unwrapped by change detection, and the unwrapped value will be stored.
- *
- * @exportedAs angular2/pipes
- */
-export class WrappedValue {
-  constructor(public wrapped: any) {}
-
-  static wrap(value: any): WrappedValue {
-    var w = _wrappedValues[_wrappedIndex++ % 5];
-    w.wrapped = value;
-    return w;
-  }
-}
-
-var _wrappedValues = [
-  new WrappedValue(null),
-  new WrappedValue(null),
-  new WrappedValue(null),
-  new WrappedValue(null),
-  new WrappedValue(null)
-];
-
-var _wrappedIndex = 0;
+export {WrappedValue} from './wrapped_value';
 
 /**
  * An interface for extending the list of pipes known to Angular.
@@ -50,25 +23,17 @@ var _wrappedIndex = 0;
  * @exportedAs angular2/pipes
  */
 export class Pipe {
+  constructor() {
+    // Replace transform function with one that has a lexical this.
+    this.transform = this.transform.bind(this);
+  }
+
   supports(obj): boolean { return false; }
   onDestroy() {}
-  transform(value: any): any { return null; }
+  transform(value: any, ...args: any[]): any { return null; }
 }
 
-// TODO: vsavkin: make it an interface
-@CONST()
-export class PipeFactory {
-  supports(obs): boolean {
-    _abstract();
-    return false;
-  }
-
-  create(cdRef): Pipe {
-    _abstract();
-    return null;
-  }
-}
-
-function _abstract() {
-  throw new BaseException('This method is abstract');
+export interface PipeFactory {
+  supports(obs): boolean;
+  create(cdRef): Pipe;
 }

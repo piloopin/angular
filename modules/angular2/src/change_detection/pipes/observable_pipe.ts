@@ -100,9 +100,7 @@ export class ObservablePipe extends Pipe {
  * @exportedAs angular2/pipes
  */
 @CONST()
-export class ObservablePipeFactory extends PipeFactory {
-  constructor() { super(); }
-
+export class ObservablePipeFactory implements PipeFactory {
   supports(obs): boolean { return ObservableWrapper.isObservable(obs); }
 
   create(cdRef): Pipe { return new ObservablePipe(cdRef); }

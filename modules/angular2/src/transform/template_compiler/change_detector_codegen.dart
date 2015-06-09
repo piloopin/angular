@@ -305,6 +305,9 @@ class _CodegenState {
 
   String _genPipeCheck(ProtoRecord r) {
     var context = _localNames[r.contextIndex];
+    var argString = r.args.map((arg) => this._localNames[arg]).join(", ");
+    argString = context + (argString != "" ? ", " : "") + argString;
+
     var oldValue = _fieldNames[r.selfIndex];
     var newValue = _localNames[r.selfIndex];
     var change = _changeNames[r.selfIndex];
@@ -323,7 +326,7 @@ class _CodegenState {
         $pipe = $_PIPE_REGISTRY_ACCESSOR.get('$pipeType', $context, $cdRef);
       }
 
-      $newValue = $pipe.transform($context);
+      $newValue = $pipe.transform($argString);
       if (!$_IDENTICAL_CHECK_FN($oldValue, $newValue)) {
         $newValue = $_UTIL.unwrapValue($newValue);
         $change = true;

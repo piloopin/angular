@@ -17,9 +17,7 @@ import {
 import {WrappedValue, Pipe, PipeFactory} from './pipe';
 
 @CONST()
-export class IterableChangesFactory extends PipeFactory {
-  constructor() { super(); }
-
+export class IterableChangesFactory implements PipeFactory {
   supports(obj): boolean { return IterableChanges.supportsObj(obj); }
 
   create(cdRef): Pipe { return new IterableChanges(); }

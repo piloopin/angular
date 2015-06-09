@@ -7,9 +7,7 @@ import {WrappedValue, Pipe, PipeFactory} from './pipe';
  * @exportedAs angular2/pipes
  */
 @CONST()
-export class KeyValueChangesFactory extends PipeFactory {
-  constructor() { super(); }
-
+export class KeyValueChangesFactory implements PipeFactory {
   supports(obj): boolean { return KeyValueChanges.supportsObj(obj); }
 
   create(cdRef): Pipe { return new KeyValueChanges(); }

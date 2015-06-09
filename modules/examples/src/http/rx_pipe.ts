@@ -29,9 +29,7 @@ export class RxPipe extends ObservablePipe {
  * @exportedAs angular2/pipes
  */
 @CONST()
-export class RxPipeFactory extends PipeFactory {
-  constructor() { super(); }
-
+export class RxPipeFactory implements PipeFactory {
   supports(obs): boolean { return obs instanceof (<any>Rx).default.Rx.Observable }
 
   create(cdRef): Pipe { return new RxPipe(cdRef); }

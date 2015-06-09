@@ -1,5 +1,5 @@
 import {isString, StringWrapper} from 'angular2/src/facade/lang';
-import {Pipe} from './pipe';
+import {Pipe, PipeFactory} from './pipe';
 
 /**
  * Implements uppercase transforms to text.
@@ -46,8 +46,8 @@ export class UpperCasePipe extends Pipe {
 /**
  * @exportedAs angular2/pipes
  */
-export class UpperCaseFactory {
+export class UpperCaseFactory implements PipeFactory {
   supports(str): boolean { return isString(str); }
 
-  create(): Pipe { return new UpperCasePipe(); }
+  create(cdRef): Pipe { return new UpperCasePipe(); }
 }

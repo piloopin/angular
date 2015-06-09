@@ -243,6 +243,9 @@ export class ChangeDetectorJITGenerator {
 
   _genPipeCheck(r: ProtoRecord): string {
     var context = this._localNames[r.contextIndex];
+    var argString = r.args.map((arg) => this._localNames[arg]).join(", ");
+    argString = context + (argString !== "" ? ", " : "") + argString;
+
     var oldValue = this._fieldNames[r.selfIndex];
     var newValue = this._localNames[r.selfIndex];
     var change = this._changeNames[r.selfIndex];
@@ -262,7 +265,7 @@ export class ChangeDetectorJITGenerator {
         ${pipe} = ${PIPE_REGISTRY_ACCESSOR}.get('${pipeType}', ${context}, ${cdRef});
       }
 
-      ${newValue} = ${pipe}.transform(${context});
+      ${newValue} = ${pipe}.transform(${argString});
       if (${oldValue} !== ${newValue}) {
         ${newValue} = ${UTIL}.unwrapValue(${newValue});
         ${change} = true;
