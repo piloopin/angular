@@ -12,6 +12,8 @@ import {LowerCaseFactory} from './pipes/lowercase_pipe';
 import {JsonPipe} from './pipes/json_pipe';
 import {LimitToPipeFactory} from './pipes/limit_to_pipe';
 import {NullPipeFactory} from './pipes/null_pipe';
+import {NumberPipeFactory, DecimalPipe, PercentPipe, CurrencyPipe} from './pipes/number_pipe';
+import {DatePipeFactory} from './pipes/date_pipe';
 import {ChangeDetection, ProtoChangeDetector, ChangeDetectorDefinition} from './interfaces';
 import {Inject, Injectable, OpaqueToken, Optional} from 'angular2/di';
 import {List, StringMap, StringMapWrapper} from 'angular2/src/facade/collection';
@@ -67,6 +69,37 @@ export var json: List<PipeFactory | Pipe> = [new JsonPipe(), new NullPipeFactory
  */
 export var limitTo: List<PipeFactory> = [new LimitToPipeFactory(), new NullPipeFactory()];
 
+/**
+ * Number number transform.
+ *
+ * @exportedAs angular2/pipes
+ */
+export var number: List<PipeFactory> =
+    [new NumberPipeFactory(new DecimalPipe()), new NullPipeFactory()];
+
+/**
+ * Percent number transform.
+ *
+ * @exportedAs angular2/pipes
+ */
+export var percent: List<PipeFactory> =
+    [new NumberPipeFactory(new PercentPipe()), new NullPipeFactory()];
+
+/**
+ * Currency number transform.
+ *
+ * @exportedAs angular2/pipes
+ */
+export var currency: List<PipeFactory> =
+    [new NumberPipeFactory(new CurrencyPipe()), new NullPipeFactory()];
+
+/**
+ * Date/time formatter.
+ *
+ * @exportedAs angular2/pipes
+ */
+export var date: List<PipeFactory> = [new DatePipeFactory(), new NullPipeFactory()];
+
 export var defaultPipes = {
   "iterableDiff": iterableDiff,
   "keyValDiff": keyValDiff,
@@ -74,7 +107,11 @@ export var defaultPipes = {
   "uppercase": uppercase,
   "lowercase": lowercase,
   "json": json,
-  "limitTo": limitTo
+  "limitTo": limitTo,
+  "number": number,
+  "percent": percent,
+  "currency": currency,
+  "date": date
 };
 
 /**

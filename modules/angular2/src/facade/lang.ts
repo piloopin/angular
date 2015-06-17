@@ -67,6 +67,14 @@ export function isString(obj): boolean {
   return typeof obj === "string";
 }
 
+export function isNumber(obj): boolean {
+  return typeof obj === "number";
+}
+
+export function isDate(obj): boolean {
+  return obj instanceof Date && !isNaN(obj.valueOf());
+}
+
 export function isFunction(obj): boolean {
   return typeof obj === "function";
 }
@@ -266,8 +274,12 @@ export class Json {
 }
 
 export class DateWrapper {
-  static fromMillis(ms) { return new Date(ms); }
-  static toMillis(date: Date) { return date.getTime(); }
-  static now() { return new Date(); }
-  static toJson(date) { return date.toJSON(); }
+  static create(year: int, month: int = 1, day: int = 1, hour: int = 0, minutes: int = 0,
+                seconds: int = 0, milliseconds: int = 0) {
+    return new Date(year, month - 1, day, hour, minutes, seconds, milliseconds);
+  }
+  static fromMillis(ms: int): Date { return new Date(ms); }
+  static toMillis(date: Date): int { return date.getTime(); }
+  static toJson(date: Date): string { return date.toJSON(); }
+  static now(): Date { return new Date(); }
 }
