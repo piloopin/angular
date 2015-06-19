@@ -283,3 +283,8 @@ export class DateWrapper {
   static toJson(date: Date): string { return date.toJSON(); }
   static now(): Date { return new Date(); }
 }
+
+export function compare(a, b): int {
+  if (a === b) return 0;
+  return a < b ? -1 : 1;
+}

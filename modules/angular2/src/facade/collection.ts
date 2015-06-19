@@ -147,6 +147,10 @@ export class StringMapWrapper {
 export class ListWrapper {
   static create(): List<any> { return new List(); }
   static createFixedSize(size): List<any> { return new List(size); }
+  static from(iterable) {
+    // Array.from(iterable) is not properly supported.
+    return [...iterable];
+  }
   static get(m, k) { return m[k]; }
   static set(m, k, v) { m[k] = v; }
   static clone(array: List<any>) { return array.slice(0); }

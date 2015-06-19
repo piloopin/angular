@@ -103,6 +103,7 @@ class ListWrapper {
   static List clone(Iterable l) => new List.from(l);
   static List create() => new List();
   static List createFixedSize(int size) => new List(size);
+  static List from(iterable) => new List.from(iterable);
   static get(List m, int k) => m[k];
   static void set(List m, int k, v) {
     m[k] = v;

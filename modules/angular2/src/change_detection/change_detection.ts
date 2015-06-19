@@ -14,6 +14,7 @@ import {LimitToPipeFactory} from './pipes/limit_to_pipe';
 import {NullPipeFactory} from './pipes/null_pipe';
 import {NumberPipeFactory, DecimalPipe, PercentPipe, CurrencyPipe} from './pipes/number_pipe';
 import {DatePipeFactory} from './pipes/date_pipe';
+import {OrderByPipeFactory} from './pipes/order_by_pipe';
 import {ChangeDetection, ProtoChangeDetector, ChangeDetectorDefinition} from './interfaces';
 import {Inject, Injectable, OpaqueToken, Optional} from 'angular2/di';
 import {List, StringMap, StringMapWrapper} from 'angular2/src/facade/collection';
@@ -100,6 +101,13 @@ export var currency: List<PipeFactory> =
  */
 export var date: List<PipeFactory> = [new DatePipeFactory(), new NullPipeFactory()];
 
+/**
+ * Sorts an iterable.
+ *
+ * @exportedAs angular2/pipes
+ */
+export var orderBy: List<PipeFactory> = [new OrderByPipeFactory(), new NullPipeFactory()];
+
 export var defaultPipes = {
   "iterableDiff": iterableDiff,
   "keyValDiff": keyValDiff,
@@ -111,7 +119,8 @@ export var defaultPipes = {
   "number": number,
   "percent": percent,
   "currency": currency,
-  "date": date
+  "date": date,
+  "orderBy": orderBy
 };
 
 /**

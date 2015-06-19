@@ -15,3 +15,4 @@ export {KeyValueChanges} from './src/change_detection/pipes/keyvalue_changes';
 export {DatePipe} from './src/change_detection/pipes/date_pipe';
 export {DecimalPipe, PercentPipe, CurrencyPipe} from './src/change_detection/pipes/number_pipe';
 export {LimitToPipe} from './src/change_detection/pipes/limit_to_pipe';
+export {OrderByPipe} from './src/change_detection/pipes/order_by_pipe';

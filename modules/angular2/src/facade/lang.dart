@@ -246,5 +246,7 @@ class DateWrapper {
   }
 }
 
+int compare(a, b) => Comparable.compare(a, b);
+
 // needed to match the exports from lang.js
 var global = null;
